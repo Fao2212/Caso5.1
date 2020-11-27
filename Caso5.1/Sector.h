@@ -6,13 +6,15 @@ class Sector {
 	float rangeStart;
 	float rangeEnd;
 	float zeroDistribution;
+	int pos;
 
 public:
 	Sector();
 	Sector(float pStartRange, float pEndRange);
-	int setRange(float pStart,float pEnd);
+	void setRange(float pStart,float pEnd);
 	void printRange();
 	void addZero();
 	float setDistribution(int pTotalZeros);
-
+	bool isInRange(int pNumber);
+	int getPos();
 };

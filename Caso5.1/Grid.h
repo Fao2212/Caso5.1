@@ -2,7 +2,7 @@
 #include <set>
 #include "Sector.h"
 
-class Grid {
+class Grid {//txt grid generator filled with ones, manually fill the 0?
 
 	const float SCALE_RANGES[23] = { 0 ,0.02523659306 ,0.05678233438 ,0.08201892744 ,0.1545741325 ,0.1741324921,
 									0.2782334385 ,0.2977917981 ,0.3703470032 ,0.41829653 ,0.4927444795,
@@ -32,6 +32,7 @@ public:
 	void setDimensions(std::pair<int, int> pZeroPos);
 	void samplingSectors(int* pWorkingGrid[]);
 	void calculateRanges();
+	void isInRange(Sector* pSector, int pRandomRange);
 	void compareSectors();
 	void showRanges();
 

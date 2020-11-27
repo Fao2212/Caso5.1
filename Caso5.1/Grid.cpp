@@ -83,8 +83,8 @@ void Grid::samplingSectors(int* pWorkingGrid[])//Tengo que tomar en cuenta los s
 	int samplingSize = maxZeros * SAMPLE_SIZE_PERCENTAGE;
 	for (int zeroIndex = 0; zeroIndex < samplingSize; zeroIndex)
 	{
-		int randomX = minZeroPos.first + (rand()%maxZeroPos.first);//Dentro de los limites del max y el min
-		int randomY = minZeroPos.second + (rand() % maxZeroPos.second);
+		int randomX = (minZeroPos.first-1) + (rand()% minZeroPos.first) + 1;//Dentro de los limites del max y el min
+		int randomY = (minZeroPos.second-1) + (rand() % minZeroPos.second) + 1;
 		if (pWorkingGrid[randomX][randomY] == 0) {
 			randomX -= minZeroPos.first;
 			randomY -= minZeroPos.second;
@@ -111,9 +111,27 @@ void Grid::calculateRanges()//Evitar los excluidos
 		}
 }
 
-void Grid::compareSectors()
+void Grid::compareSectors()//Acomodar con un estilo de tabla falta setear el index del sector
 {
-	//Sacar n randoms de 0 a 1
+	Sector* scaleSector = NULL;
+	Sector* sector = NULL;
+	int coincidences = 0;
+	for (int index = 0; index < NUMBER_OF_TESTS; index++) {
+		int randomTest = rand();//Saca un numero de 0 a 1
+		for (int indexRow = 0; indexRow < 5; indexRow++) {
+			for (int indexColumn = 0; indexColumn < 5; indexColumn++) {
+				if (UNUSED_SCALE_SECTORS.find(index++) == UNUSED_SCALE_SECTORS.end())
+				{
+					if (scaleSector == NULL && scaleSectors[indexRow][indexColumn]->isInRange(randomTest))
+					scaleSector = scaleSectors[indexRow][indexColumn];
+					if (sector == NULL && sectors[indexRow][indexColumn]->isInRange(randomTest))
+					sector = sectors[indexRow][indexColumn];
+				}
+			}
+		}
+		if (scaleSector->getPos() == sector->getPos())
+			coincidences++;
+	}
 }
 
 
