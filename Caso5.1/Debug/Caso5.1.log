@@ -1,10 +1,5 @@
-﻿  Grid.cpp
-C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.h(10,96): warning C4305: 'inicializando': truncamiento de 'double' a 'const float'
-C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.h(14,37): warning C4305: 'inicializando': truncamiento de 'double' a 'const float'
-C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.cpp(36,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.cpp(83,19): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-  main.cpp
-C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.h(10,96): warning C4305: 'inicializando': truncamiento de 'double' a 'const float'
-C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.h(14,37): warning C4305: 'inicializando': truncamiento de 'double' a 'const float'
-  Generando código...
+﻿  TextSector.cpp
+C:\Users\ACER\source\repos\Caso5.1\Caso5.1\TextSector.cpp(15,18): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\ACER\source\repos\Caso5.1\Caso5.1\TextSector.cpp(40,20): warning C4018: '<': no coinciden signed/unsigned
+C:\Users\ACER\source\repos\Caso5.1\Caso5.1\TextSector.cpp(66,15): warning C4018: '<=': no coinciden signed/unsigned
   Caso5.1.vcxproj -> C:\Users\ACER\source\repos\Caso5.1\Debug\Caso5.1.exe

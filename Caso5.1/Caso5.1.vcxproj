@@ -19,15 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Appareance.cpp" />
+    <ClCompile Include="Comparator.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Plagiarism.cpp" />
     <ClCompile Include="Sector.cpp" />
     <ClCompile Include="TestSector.cpp" />
+    <ClCompile Include="TextSector.cpp" />
+    <ClCompile Include="Word.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Appareance.h" />
+    <ClInclude Include="Comparator.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="Plagiarism.h" />
     <ClInclude Include="Sector.h" />
     <ClInclude Include="TestSector.h" />
+    <ClInclude Include="TextSector.h" />
+    <ClInclude Include="Word.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

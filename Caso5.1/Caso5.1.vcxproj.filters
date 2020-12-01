@@ -13,30 +13,84 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de encabezado\HeadersWGrid">
+      <UniqueIdentifier>{3dce9871-c7fb-4506-980b-da5247a7458d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\FilesWGrid">
+      <UniqueIdentifier>{0ef5bf74-2d37-40d3-892a-ffcbe35dff40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\HeadersPlagiarism">
+      <UniqueIdentifier>{d2a73832-68a2-452b-8e66-349c4831fd0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\FilesPlagiarism">
+      <UniqueIdentifier>{4dc23965-f973-46aa-a686-cb6ca6fd8488}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TestSector.cpp">
+      <Filter>Archivos de origen\FilesWGrid</Filter>
+    </ClCompile>
     <ClCompile Include="Grid.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\FilesWGrid</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\FilesWGrid</Filter>
     </ClCompile>
     <ClCompile Include="Sector.cpp">
+      <Filter>Archivos de origen\FilesWGrid</Filter>
+    </ClCompile>
+    <ClCompile Include="Comparator.cpp">
+      <Filter>Archivos de origen\FilesPlagiarism</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="TestSector.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Appareance.cpp">
+      <Filter>Archivos de origen\FilesPlagiarism</Filter>
+    </ClCompile>
+    <ClCompile Include="TextSector.cpp">
+      <Filter>Archivos de origen\FilesPlagiarism</Filter>
+    </ClCompile>
+    <ClCompile Include="Word.cpp">
+      <Filter>Archivos de origen\FilesPlagiarism</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Archivos de origen\FilesPlagiarism</Filter>
+    </ClCompile>
+    <ClCompile Include="Plagiarism.cpp">
+      <Filter>Archivos de origen\FilesPlagiarism</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TestSector.h">
+      <Filter>Archivos de encabezado\HeadersWGrid</Filter>
+    </ClInclude>
     <ClInclude Include="Grid.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\HeadersWGrid</Filter>
     </ClInclude>
     <ClInclude Include="Sector.h">
+      <Filter>Archivos de encabezado\HeadersWGrid</Filter>
+    </ClInclude>
+    <ClInclude Include="TextSector.h">
+      <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
+    </ClInclude>
+    <ClInclude Include="Word.h">
+      <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
+    </ClInclude>
+    <ClInclude Include="Comparator.h">
+      <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="TestSector.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Appareance.h">
+      <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
+    </ClInclude>
+    <ClInclude Include="Plagiarism.h">
+      <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
