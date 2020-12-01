@@ -5,7 +5,7 @@ class Sector {
 	int zeroQuantity;
 	float rangeStart;
 	float rangeEnd;
-	float zeroDistribution;
+	double zeroDistribution;
 	int pos;
 
 public:
@@ -14,7 +14,7 @@ public:
 	void setRange(float pStart,float pEnd);
 	void printRange();
 	void addZero();
-	float setDistribution(int pTotalZeros);
-	bool isInRange(int pNumber);
+	double setDistribution(double pTotalZeros);
+	bool isInRange(double pNumber);
 	int getPos();
 };

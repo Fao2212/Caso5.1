@@ -12,7 +12,7 @@ class Grid {//txt grid generator filled with ones, manually fill the 0?
 	const int SAMPLING_COLUMNS = 20;//Considerar las matrices mas pequenas que esto
 	const int NUMBER_OF_TESTS = 10;
 	const float SAMPLE_SIZE_PERCENTAGE = 0.15;//Esto es para el total de ceros encontrados en la primera fase
-	const std::set<int> UNUSED_SCALE_SECTORS = { 1,3,22,25 };
+	const std::set<int> UNUSED_SCALE_SECTORS = { 1,3,22 };
 
 	Sector * scaleSectors[5][5];
 	Sector * sectors[5][5];

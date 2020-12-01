@@ -32,7 +32,7 @@ void Grid::samplingGrid(int* pWorkingGrid[], int pRows, int pColumns) //Basta co
 	int maxZeros = pRows * pColumns;
 	int workingTestRows = pRows / SAMPLING_ROWS;
 	int workingTestColumns = pColumns / SAMPLING_COLUMNS;
-	int numberOfSectors = SAMPLING_ROWS-1;
+	int numberOfSectors = SAMPLING_ROWS-1;//Aca hay problemas
 	double samplingSize = maxZeros * SAMPLE_SIZE_PERCENTAGE;
 	int xRange = 0;
 	int yRange = 0;
@@ -53,7 +53,6 @@ void Grid::samplingGrid(int* pWorkingGrid[], int pRows, int pColumns) //Basta co
 		{
 			if (testSector->canTest(randomTest)) {
 				searchPos = testSector->selectPos();
-				std::cout << searchPos.first << "-" << searchPos.second<<std::endl;
 				if (pWorkingGrid[searchPos.first][searchPos.second] == 0) {
 					setDimensions(searchPos);
 				}
@@ -82,59 +81,68 @@ void Grid::samplingSectors(int* pWorkingGrid[])//Tengo que tomar en cuenta los s
 {
 	int maxZeros = workingRow * workingColumn;
 	int samplingSize = maxZeros * SAMPLE_SIZE_PERCENTAGE;
+	int scaleColumn = workingColumn / 5;
+	int scaleRow = workingRow / 5;
 	for (int zeroIndex = 0; zeroIndex < samplingSize; zeroIndex++)
 	{
-		int randomX = (minZeroPos.first) + (rand()% (maxZeroPos.first - minZeroPos.first + 1));
-		int randomY = (minZeroPos.second) + (rand() %(maxZeroPos.second - minZeroPos.second + 1));
-		if (pWorkingGrid[randomX][randomY] == 0) {
-			randomX -= minZeroPos.first;
-			randomY -= minZeroPos.second;
-			sectors[randomX / workingColumn/5][randomY % workingRow%5]->addZero();
-			totalZeros++;
+		int randomCol = (minZeroPos.first) + (rand()% (maxZeroPos.first - minZeroPos.first + 1));
+		int randomRow = (minZeroPos.second) + (rand() %(maxZeroPos.second - minZeroPos.second + 1));
+		if (pWorkingGrid[randomCol][randomRow] == 0) {
+			Sector* currentSector = sectors[((randomCol % scaleColumn)) / 5][(randomRow / scaleRow) % 5];
+			if (currentSector != NULL) {
+				currentSector->addZero();
+				totalZeros++;
+			}
 		}
 	}
 }
 
-void Grid::calculateRanges()//Evitar los excluidos
+void Grid::calculateRanges()//Evitar los excluidos tomar en cuenta el lastD en 0
 {
-	float startRange = 0;
-	float lastDistribution = 0;
+	double startRange = 0;
+	double lastDistribution = 0;
 	int index = 0;
 	for (int indexRow = 0; indexRow < 5; indexRow++)
 		for (int indexColumn = 0; indexColumn < 5; indexColumn++) {
 			{
 				if (UNUSED_SCALE_SECTORS.find(index++) == UNUSED_SCALE_SECTORS.end()) {
-					std::cout << index<<std::endl;
-					lastDistribution = sectors[indexRow][indexColumn]->setDistribution(totalZeros);
-					sectors[indexRow][indexColumn]->setRange(startRange, startRange + lastDistribution);
+					lastDistribution = sectors[indexColumn][indexRow]->setDistribution(totalZeros);
+					sectors[indexColumn][indexRow]->setRange(startRange, startRange + lastDistribution);
+					sectors[indexColumn][indexRow]->printRange();
 					startRange += lastDistribution;
 				}
 			}
 		}
+	std::cout << "---------------------------------------------" << std::endl;
 }
 
 bool Grid::compareSectors()
 {
-	Sector* scaleSector = NULL;
-	Sector* sector = NULL;
 	int coincidences = 0;
 	for (int index = 0; index < NUMBER_OF_TESTS; index++) {
-		int randomTest = rand();//Saca un numero de 0 a 1
+		double randomTest = rand() / double(RAND_MAX+1.0);//Saca un numero de 0 a 1
+		int posIndex = 0;
+		Sector* scaleSector = NULL;
+		Sector* sector = NULL;
+		std::cout<<"i"<<index<<std::endl;
+		std::cout << randomTest << std::endl;
 		for (int indexRow = 0; indexRow < 5; indexRow++) {
 			for (int indexColumn = 0; indexColumn < 5; indexColumn++) {
-				if (UNUSED_SCALE_SECTORS.find(index++) == UNUSED_SCALE_SECTORS.end())
+				if (UNUSED_SCALE_SECTORS.find(posIndex++) == UNUSED_SCALE_SECTORS.end())
 				{
-					if (scaleSector == NULL && scaleSectors[indexRow][indexColumn]->isInRange(randomTest))
-						scaleSector = scaleSectors[indexRow][indexColumn];
-					if (sector == NULL && sectors[indexRow][indexColumn]->isInRange(randomTest))
-						sector = sectors[indexRow][indexColumn];
+					if (scaleSector == NULL && scaleSectors[indexColumn][indexRow]->isInRange(randomTest))
+						scaleSector = scaleSectors[indexColumn][indexRow];
+					if (sector == NULL && sectors[indexColumn][indexRow]->isInRange(randomTest))
+						sector = sectors[indexColumn][indexRow];
 				}
 			}
 		}
+		std::cout << "Sectors" << scaleSector->getPos() << "-" << sector->getPos()<<std::endl;
 		if (scaleSector->getPos() == sector->getPos())
 			coincidences++;
 	}
-	if (coincidences > 7)
+	std::cout << "Coincidences" << coincidences<<std::endl;
+	if (coincidences > 6)
 		return true;
 	return false;
 }
@@ -146,7 +154,7 @@ bool Grid::resolve()
 		if (compareSectors())
 			coincidencesCounter++;
 	}
-	if (coincidencesCounter > 7)
+	if (coincidencesCounter > 5)
 		return true;
 	return false;
 }

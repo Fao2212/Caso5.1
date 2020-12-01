@@ -36,17 +36,19 @@ void Sector::addZero()
 	zeroQuantity++;
 }
 
-float Sector::setDistribution(int pTotalZeros)
+double Sector::setDistribution(double pTotalZeros)
 {
-	return zeroDistribution = zeroQuantity / pTotalZeros;
+	zeroDistribution = zeroQuantity / pTotalZeros;
+	return zeroDistribution;
 }
 
-bool Sector::isInRange(int pNumber)
+bool Sector::isInRange(double pNumber)
 {
-	return pNumber >= rangeStart && pNumber <= rangeEnd;
+	return pNumber > rangeStart && pNumber < rangeEnd;
 }
 
 int Sector::getPos()
 {
-	return this->pos;
+	if(this != NULL)
+		return pos;
 }

@@ -1,3 +1,4 @@
-﻿  Sector.cpp
-C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Sector.cpp(41,41): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+﻿  main.cpp
+C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.h(10,96): warning C4305: 'inicializando': truncamiento de 'double' a 'const float'
+C:\Users\ACER\source\repos\Caso5.1\Caso5.1\Grid.h(14,37): warning C4305: 'inicializando': truncamiento de 'double' a 'const float'
   Caso5.1.vcxproj -> C:\Users\ACER\source\repos\Caso5.1\Debug\Caso5.1.exe

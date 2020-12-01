@@ -10,6 +10,8 @@ int main ()
 
 	//Poner las dimensiones de los archivos a usar hardcodeados
 	//W1 512*400
+	//W2 512*400
+	//W3 512*400 *sin w*
 	int const ROWS = 400;
 	int const COLUMNS = 512;
 	std::string gridString = FileManager::readFile("w1.txt");
@@ -37,6 +39,7 @@ int main ()
 	grid->samplingGrid(gridContainer,ROWS,COLUMNS);//Ncesito una matriz
 	grid->samplingSectors(gridContainer);
 	grid->calculateRanges();
+	std::cout<<grid->resolve();
 
 	//Comparator* comparator = new Comparator();
 	//comparator->readText();
