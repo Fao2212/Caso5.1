@@ -22,27 +22,27 @@ void TextSector::sample()
 void TextSector::getRandomWord()
 {
 	
-	int randomPos = (range.first) + (rand() % (range.second-range.first+1));//Random correcto para rangos
+	int randomPos = (range.first) + (rand() % (range.second-range.first+1));				//Random correcto para rangos
 	int wordInit = randomPos;
 	int wordEnd = randomPos;
-	if (wordInit != 0) 
+	if (wordInit != 0)																		//Aca encuentro los "limites de la palabra"
 	{
 		do
 		{
 			wordInit--;
-		} while (wordInit > 0  && text[wordInit] != ' ' );										//Esta condicion de parada es muy prblematica
+		} while (wordInit > 0  && text[wordInit] != ' ' && text[wordInit] != '\n');			//Esta condicion de parada es muy prblematica
 	}
 	if (wordEnd != text.size() - 1)
 	{
 		do
 		{
 			wordEnd++;
-		} while (wordEnd < text.size() - 1 &&  text[wordEnd] != ' ');
+		} while (wordEnd < text.size() - 1 &&  text[wordEnd] != ' ' && text[wordEnd] != '\n');
 	}
 	std::string word = text.substr(wordInit, (wordEnd - wordInit));
-	Word* currentWord;																//Crea word como cajon de aparciciones de la palabra
+	Word* currentWord;																		//Crea word como cajon de aparciciones de la palabra
 	int wordWeigth = getWeight(wordInit,wordEnd);
-	Appareance* appareance = new Appareance(wordInit,wordWeigth);					//Apariciones lleva el peso y posicion de aparicion
+	Appareance* appareance = new Appareance(wordInit,wordWeigth);							//Apariciones lleva el peso y posicion de aparicion
 
 	if (wordApparence->find(word) == wordApparence->end()) {
 		currentWord = new Word();
@@ -55,18 +55,29 @@ void TextSector::getRandomWord()
 	}
 }
 
-int TextSector::getWeight(int pInitPos, int pEndPos)
+int TextSector::getWeight(int pInitPos, int pEndPos)										//Este getWight no funciona para dar un verdadero peso
 {
-	int weigth = 0;
+	int weigth = 0;																			//Puedo crear otro hash que le de a las palabras un id
+	int leftWordCounter = 0;																//Y que las probabilidades dependan de el "fingerprint"
+	int rightWordCounter = 0;
+	int numberOfWords = 3;
 	for (int index = 0; index < 15; index++) {
 		pInitPos--;
 		pEndPos++;
-		if (pInitPos >= 0 && text[pInitPos] != ' ')
-			weigth += text[pInitPos];
-		if (pEndPos <= text.size() && text[pEndPos] != ' ')
-			weigth += text[pEndPos];
+		if (pInitPos >= 0 && leftWordCounter <= numberOfWords)
+		{
+			if (text[pInitPos] == ' ')
+				leftWordCounter++;
+			else
+				weigth += text[pInitPos];
+		}
+		if (pEndPos <= text.size() && rightWordCounter <= numberOfWords)
+		{
+			if (text[pEndPos] == ' ')
+				rightWordCounter++;
+			else
+				weigth += text[pEndPos];
+		}
 	}
 	return weigth;
 }
-
-//	std::cout << pInitPos << "-" << pEndPos;

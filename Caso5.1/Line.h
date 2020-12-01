@@ -5,10 +5,10 @@ class Line
 {
 
 	std::string text;
-	int weight;
+	double weight;
 public:
-	Line(std::string pText,int pWeigth);
-	int getWeight();
+	Line(std::string pText,double pWeigth);
+	double getWeight();
 	std::string getText();
 
 };

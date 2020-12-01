@@ -12,7 +12,9 @@ int main ()
 	//W1 512*400
 	//W2 512*400
 	//W3 512*400 *sin w*
-	int const ROWS = 400;
+
+	//GRID CREATION
+	/*int const ROWS = 400;
 	int const COLUMNS = 512;
 	std::string gridString = FileManager::readFile("w1.txt");
 	int** gridContainer = new int*[ROWS];
@@ -32,22 +34,23 @@ int main ()
 				gridContainer[i][j] = 1;
 			index++;
 		}
-	}
+	}*/
 
-	Grid* grid = new Grid();
+	//GRID ALGORITHM
+	/*Grid* grid = new Grid();
 	grid->setScaleSectors();
 	grid->samplingGrid(gridContainer,ROWS,COLUMNS);//Ncesito una matriz
 	grid->samplingSectors(gridContainer);
 	grid->calculateRanges();
-	std::cout<<grid->resolve();
+	std::cout<<grid->resolve();*/
 
-	//Comparator* comparator = new Comparator();
-	//comparator->readText();
-	//comparator->createSectors();
-	//comparator->sampleSectors();
-	//comparator->checkPlagiarism();
-	//comparator->showResults();
+	//PLAGIARISM ALGORITHM
+	Comparator* comparator = new Comparator();
+	comparator->readText();
+	comparator->createSectors();
+	comparator->sampleSectors();
+	comparator->checkPlagiarism();
+	comparator->showResults();
 
-	//grid->showRanges();
 	return 0;
 }

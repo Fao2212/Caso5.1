@@ -26,7 +26,7 @@ bool Word::compareWeights(int pWeightOne, int pWeightTwo)
         mayor = pWeightTwo;
         menor = pWeightOne;
     }
-    return ((menor / mayor) * 100) >= 75;
+    return ((menor / mayor) * 100) >= 99;
 }
 
 void Word::addToTextPositions(std::string pText, Appareance* pPos)

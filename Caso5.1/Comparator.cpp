@@ -49,10 +49,10 @@ void Comparator::isPlagiarism(int pStartPosOne, int pStartPosTwo)
 {
 	Line * lineOne = getLine(0,pStartPosOne);
 	Line* lineTwo = getLine(1, pStartPosTwo);
-	int pWeightOne = lineOne->getWeight();
-	int pWeightTwo = lineTwo->getWeight();
-	int mayor;
-	int menor;
+	double pWeightOne = lineOne->getWeight();
+	double pWeightTwo = lineTwo->getWeight();
+	double mayor;
+	double menor;
 	if (pWeightOne >= pWeightTwo) {
 		mayor = pWeightOne;
 		menor = pWeightTwo;
@@ -61,8 +61,8 @@ void Comparator::isPlagiarism(int pStartPosOne, int pStartPosTwo)
 		mayor = pWeightTwo;
 		menor = pWeightOne;
 	} 
-	int percentage = ((menor / mayor) * 100);
-	if (percentage >= 75)
+	double percentage = ((menor / mayor) * 100.0);
+	if (percentage >= 95)
 		plagiarismList.push_back(new Plagiarism(lineOne, lineTwo,percentage));
 }
 
@@ -70,7 +70,7 @@ Line* Comparator::getLine(int pText, int pInitialPos)
 {
 	int pEndPos = pInitialPos;
 	std::string workingText;
-	int weigth = 0;
+	double weigth = 0;
 	if (pText == 0)
 		workingText = text1;
 	else
@@ -78,19 +78,19 @@ Line* Comparator::getLine(int pText, int pInitialPos)
 
 	if (pInitialPos != 0)
 	{
-		 while (pInitialPos > 0 && workingText[pInitialPos] != '.') 
+		 while (pInitialPos > 0 && workingText[pInitialPos] != '.' && workingText[pInitialPos] != '/n')
 		 {
 
 			pInitialPos--;
-			weigth = +workingText[pInitialPos];
+			weigth += workingText[pInitialPos];
 		}
 	}
 	if (pEndPos != workingText.size() - 1)
 	{
-		 while (pEndPos < workingText.size() - 1 && workingText[pEndPos] != '.')
+		 while (pEndPos < workingText.size() - 1 && workingText[pInitialPos] != '.' && workingText[pEndPos] != '/n')
 		{
 			pEndPos++;
-			weigth = +workingText[pEndPos];
+			weigth += workingText[pEndPos];
 		}
 		
 	}
@@ -100,7 +100,6 @@ Line* Comparator::getLine(int pText, int pInitialPos)
 
 void Comparator::showResults()
 {
-	std::cout << plagiarismList.size();
 	for (auto const& plag : plagiarismList) {
 		std::cout<<plag->toString();
 	}

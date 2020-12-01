@@ -13,7 +13,7 @@ std::string Plagiarism::toString()
 	std::string plagString = "---------------------------------------\n";
 	plagString += textOneLine->getText()+"\n";
 	plagString += textTwoLine->getText() + "\n";
-	plagString += +"Probability " +std::to_string(percentage);
-	plagString += "---------------------------------------\n";
+	plagString += +"Probability " +std::to_string(percentage)+"\n";
+	plagString += "---------------------------------------\n\n";
 	return plagString;
 }

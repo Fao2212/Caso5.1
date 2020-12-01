@@ -1,12 +1,12 @@
 #include "Line.h"
 
-Line::Line(std::string pText, int pWeigth)
+Line::Line(std::string pText, double pWeigth)
 {
     text = pText;
     weight = pWeigth;
 }
 
-int Line::getWeight()
+double Line::getWeight()
 {
     return weight;
 }
