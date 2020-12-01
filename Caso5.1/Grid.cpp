@@ -14,8 +14,8 @@ void Grid::setScaleSectors()//Setea el modelo de comparacion
 		for (int indexColumn = 0; indexColumn < 5; indexColumn++) {
 			{
 				if (UNUSED_SCALE_SECTORS.find(index++) == UNUSED_SCALE_SECTORS.end()) {
-					sectors[indexColumn][indexRow] = new Sector();
-					scaleSectors[indexColumn][indexRow] = new Sector(SCALE_RANGES[rangeSetterIndex], SCALE_RANGES[rangeSetterIndex + 1]);
+					sectors[indexColumn][indexRow] = new Sector(index);
+					scaleSectors[indexColumn][indexRow] = new Sector(SCALE_RANGES[rangeSetterIndex], SCALE_RANGES[rangeSetterIndex + 1],index);
 					rangeSetterIndex++;
 				}
 				else
@@ -31,9 +31,9 @@ void Grid::samplingGrid(int* pWorkingGrid[], int pRows, int pColumns) //Basta co
 {
 	int maxZeros = pRows * pColumns;
 	int workingTestRows = pRows / SAMPLING_ROWS;
-	int workingTestColumns = pRows / SAMPLING_COLUMNS;
-	int numberOfSectors = SAMPLING_ROWS * SAMPLING_COLUMNS;
-	int samplingSize = maxZeros * SAMPLE_SIZE_PERCENTAGE;
+	int workingTestColumns = pColumns / SAMPLING_COLUMNS;
+	int numberOfSectors = SAMPLING_ROWS-1;
+	double samplingSize = maxZeros * SAMPLE_SIZE_PERCENTAGE;
 	int xRange = 0;
 	int yRange = 0;
 	std::pair<int, int> searchPos;
@@ -46,13 +46,14 @@ void Grid::samplingGrid(int* pWorkingGrid[], int pRows, int pColumns) //Basta co
 		xRange += workingTestRows;
 		yRange += workingTestColumns;
 	}
-	
+
 	for (int zeroIndex = 0; zeroIndex < samplingSize; zeroIndex++) {
-		int randomTest = rand()%100; //Ajustar el seed
+		int randomTest = rand()%101; //Ajustar el seed
 		for (auto const& testSector:testSectors)
 		{
 			if (testSector->canTest(randomTest)) {
 				searchPos = testSector->selectPos();
+				std::cout << searchPos.first << "-" << searchPos.second<<std::endl;
 				if (pWorkingGrid[searchPos.first][searchPos.second] == 0) {
 					setDimensions(searchPos);
 				}
@@ -68,10 +69,10 @@ void Grid::samplingGrid(int* pWorkingGrid[], int pRows, int pColumns) //Basta co
 
 void Grid::setDimensions(std::pair<int, int> pZeroPos)//Que es mas caro? Una comparacion con cada 0 que obtengo o hacer un vector de posciciones y sacar el minimo y el maximo
 {
-	if (pZeroPos.first >= maxZeroPos.first && pZeroPos.second == maxZeroPos.second)
+	if (pZeroPos.first >= maxZeroPos.first && pZeroPos.second >= maxZeroPos.second)
 		maxZeroPos = pZeroPos;
 	else {
-		if (pZeroPos.first >= maxZeroPos.first && pZeroPos.second == maxZeroPos.second) {
+		if (pZeroPos.first <= maxZeroPos.first && pZeroPos.second <= maxZeroPos.second) {
 			minZeroPos = pZeroPos;
 		}
 	}
@@ -81,14 +82,14 @@ void Grid::samplingSectors(int* pWorkingGrid[])//Tengo que tomar en cuenta los s
 {
 	int maxZeros = workingRow * workingColumn;
 	int samplingSize = maxZeros * SAMPLE_SIZE_PERCENTAGE;
-	for (int zeroIndex = 0; zeroIndex < samplingSize; zeroIndex)
+	for (int zeroIndex = 0; zeroIndex < samplingSize; zeroIndex++)
 	{
-		int randomX = (minZeroPos.first-1) + (rand()% minZeroPos.first) + 1;//Dentro de los limites del max y el min
-		int randomY = (minZeroPos.second-1) + (rand() % minZeroPos.second) + 1;
+		int randomX = (minZeroPos.first) + (rand()% (maxZeroPos.first - minZeroPos.first + 1));
+		int randomY = (minZeroPos.second) + (rand() %(maxZeroPos.second - minZeroPos.second + 1));
 		if (pWorkingGrid[randomX][randomY] == 0) {
 			randomX -= minZeroPos.first;
 			randomY -= minZeroPos.second;
-			sectors[randomX / workingColumn][randomY % workingRow]->addZero();
+			sectors[randomX / workingColumn/5][randomY % workingRow%5]->addZero();
 			totalZeros++;
 		}
 	}
@@ -103,6 +104,7 @@ void Grid::calculateRanges()//Evitar los excluidos
 		for (int indexColumn = 0; indexColumn < 5; indexColumn++) {
 			{
 				if (UNUSED_SCALE_SECTORS.find(index++) == UNUSED_SCALE_SECTORS.end()) {
+					std::cout << index<<std::endl;
 					lastDistribution = sectors[indexRow][indexColumn]->setDistribution(totalZeros);
 					sectors[indexRow][indexColumn]->setRange(startRange, startRange + lastDistribution);
 					startRange += lastDistribution;
@@ -111,7 +113,7 @@ void Grid::calculateRanges()//Evitar los excluidos
 		}
 }
 
-void Grid::compareSectors()//Acomodar con un estilo de tabla falta setear el index del sector
+bool Grid::compareSectors()
 {
 	Sector* scaleSector = NULL;
 	Sector* sector = NULL;
@@ -123,15 +125,30 @@ void Grid::compareSectors()//Acomodar con un estilo de tabla falta setear el ind
 				if (UNUSED_SCALE_SECTORS.find(index++) == UNUSED_SCALE_SECTORS.end())
 				{
 					if (scaleSector == NULL && scaleSectors[indexRow][indexColumn]->isInRange(randomTest))
-					scaleSector = scaleSectors[indexRow][indexColumn];
+						scaleSector = scaleSectors[indexRow][indexColumn];
 					if (sector == NULL && sectors[indexRow][indexColumn]->isInRange(randomTest))
-					sector = sectors[indexRow][indexColumn];
+						sector = sectors[indexRow][indexColumn];
 				}
 			}
 		}
 		if (scaleSector->getPos() == sector->getPos())
 			coincidences++;
 	}
+	if (coincidences > 7)
+		return true;
+	return false;
+}
+
+bool Grid::resolve()
+{
+	int coincidencesCounter = 0;
+	for (int index = 0; index < 10; index++) {
+		if (compareSectors())
+			coincidencesCounter++;
+	}
+	if (coincidencesCounter > 7)
+		return true;
+	return false;
 }
 
 

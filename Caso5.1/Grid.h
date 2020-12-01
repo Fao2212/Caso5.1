@@ -21,7 +21,7 @@ class Grid {//txt grid generator filled with ones, manually fill the 0?
 
 	int workingRow;
 	int workingColumn;
-	int totalZeros;
+	int totalZeros = 0;
 
 public:
 
@@ -32,8 +32,8 @@ public:
 	void setDimensions(std::pair<int, int> pZeroPos);
 	void samplingSectors(int* pWorkingGrid[]);
 	void calculateRanges();
-	void isInRange(Sector* pSector, int pRandomRange);
-	void compareSectors();
+	bool compareSectors();
+	bool resolve();
 	void showRanges();
 
 };

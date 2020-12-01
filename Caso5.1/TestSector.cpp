@@ -9,14 +9,15 @@ TestSector::TestSector(std::pair<int, int> pSectorStart, std::pair<int, int> pSe
 std::pair<int, int> TestSector::selectPos()
 {
 	//Genera un random entre su pos de inicio y su pos final y retorna esa pos
-	int randomX = 1+sectorStart.first + (rand() % sectorStart.first-1);
-	int randomY = 1+sectorStart.second + (rand() % sectorStart.second-1);//Se puede convertir en una libreria
+	std::cout << sectorStart.first << std::endl;
+	int randomX = sectorStart.first + (rand() % (sectorStart.second - sectorStart.first+1));
+	int randomY = sectorEnd.first + (rand() % (sectorEnd.second - sectorEnd.first+1));//Se puede convertir en una libreria
 	return std::pair<int, int>(randomX, randomY);
 }
 
 bool TestSector::canTest(int pNumber)
 {
-	return pNumber > selectionProbability;
+	return pNumber <= selectionProbability;
 }
 
 void TestSector::decreaseProbability()

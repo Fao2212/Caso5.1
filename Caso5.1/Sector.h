@@ -9,8 +9,8 @@ class Sector {
 	int pos;
 
 public:
-	Sector();
-	Sector(float pStartRange, float pEndRange);
+	Sector(int pPos);
+	Sector(float pStartRange, float pEndRange, int pPos);
 	void setRange(float pStart,float pEnd);
 	void printRange();
 	void addZero();

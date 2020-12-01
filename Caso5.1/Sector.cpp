@@ -1,20 +1,22 @@
 #include "Sector.h"
 #include <iostream>
 
-Sector::Sector()
+Sector::Sector(int pPos)
 {
 	rangeStart = 0;
 	rangeEnd = 0;
 	zeroQuantity = 0;
 	zeroDistribution = 0;
+	pos = pPos;
 }
 
-Sector::Sector(float pStartRange, float pEndRange) {
+Sector::Sector(float pStartRange, float pEndRange,int pPos) {
 
 	rangeStart = pStartRange;
 	rangeEnd = pEndRange;
 	zeroQuantity = 0;
 	zeroDistribution = 0;
+	pos = pPos;
 
 }
 
