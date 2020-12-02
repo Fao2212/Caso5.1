@@ -11,8 +11,8 @@ Plagiarism::Plagiarism(Line* pLineOne, Line* pLineTwo, int pPercentage)
 std::string Plagiarism::toString()
 {
 	std::string plagString = "---------------------------------------\n";
-	plagString += textOneLine->getText()+"\n";
-	plagString += textTwoLine->getText() + "\n";
+	plagString += "[LineOne]: \n"+textOneLine->getText()+"\n";
+	plagString += "[LineTwo]: \n" + textTwoLine->getText() + "\n";
 	plagString += +"Probability " +std::to_string(percentage)+"\n";
 	plagString += "---------------------------------------\n\n";
 	return plagString;

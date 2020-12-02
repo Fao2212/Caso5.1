@@ -49,6 +49,7 @@ int main ()
 	comparator->readText();
 	comparator->createSectors();
 	comparator->sampleSectors();
+	//comparator->showHash();
 	comparator->checkPlagiarism();
 	comparator->showResults();
 

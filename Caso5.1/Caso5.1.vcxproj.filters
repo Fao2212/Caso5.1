@@ -60,6 +60,9 @@
     <ClCompile Include="Plagiarism.cpp">
       <Filter>Archivos de origen\FilesPlagiarism</Filter>
     </ClCompile>
+    <ClCompile Include="FingerPrint.cpp">
+      <Filter>Archivos de origen\FilesPlagiarism</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestSector.h">
@@ -90,6 +93,9 @@
       <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
     </ClInclude>
     <ClInclude Include="Plagiarism.h">
+      <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
+    </ClInclude>
+    <ClInclude Include="FingerPrint.h">
       <Filter>Archivos de encabezado\HeadersPlagiarism</Filter>
     </ClInclude>
   </ItemGroup>

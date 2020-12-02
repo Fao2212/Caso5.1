@@ -1,9 +1,10 @@
 #include "Line.h"
+#include <vector>
 
-Line::Line(std::string pText, double pWeigth)
+Line::Line(std::string pText, std::vector<int> pfingerPrint)
 {
     text = pText;
-    weight = pWeigth;
+    fingerPrint = pfingerPrint;
 }
 
 double Line::getWeight()
@@ -14,4 +15,9 @@ double Line::getWeight()
 std::string Line::getText()
 {
     return text;
+}
+
+std::vector<int> Line::getFingerPrint()
+{
+    return fingerPrint;
 }

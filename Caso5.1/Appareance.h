@@ -1,17 +1,13 @@
 #pragma once
+#include <vector>
+#include <tuple>
 
 class Appareance {
 
     int pos;
-    int weightByNearest;
+    std::vector<int> fingerPrint;
 public:
-    Appareance(int pPos,int pWeight);
-
-    bool operator<(Appareance const& p) const
-    {
-        return pos < p.pos;
-    }
-
-    int getWeight();
+    Appareance(int pPos, std::vector<int> pFingerPrint);
+    std::vector<int>  getFingerPrint();
     int getPos();
 };

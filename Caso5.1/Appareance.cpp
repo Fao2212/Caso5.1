@@ -1,14 +1,14 @@
 #include "Appareance.h"
 
-Appareance::Appareance(int pPos, int pWeight)
+Appareance::Appareance(int pPos, std::vector<int>  pFingerPrint)
 {
 	pos = pPos;
-	weightByNearest = pWeight;
+	fingerPrint = pFingerPrint;
 }
 
-int Appareance::getWeight()
+std::vector<int> Appareance::getFingerPrint()
 {
-	return weightByNearest;
+	return fingerPrint;
 }
 
 int Appareance::getPos()

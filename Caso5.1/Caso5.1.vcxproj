@@ -22,6 +22,7 @@
     <ClCompile Include="Appareance.cpp" />
     <ClCompile Include="Comparator.cpp" />
     <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="FingerPrint.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="Appareance.h" />
     <ClInclude Include="Comparator.h" />
     <ClInclude Include="FileManager.h" />
+    <ClInclude Include="FingerPrint.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Plagiarism.h" />
